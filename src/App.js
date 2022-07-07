@@ -7,7 +7,6 @@ import ListaCategory from './components/ListCategory';
 function App() {
   return (
     <div className="App">
-      <Main />
       <ListaCategory />
       <BrowserRouter>
         <Routes />
