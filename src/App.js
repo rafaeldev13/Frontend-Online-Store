@@ -1,12 +1,14 @@
 import React from 'react';
-import Main from './pages/Main';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './components/Routes';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Main />
-      Requisito 3
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </div>
   );
 }
