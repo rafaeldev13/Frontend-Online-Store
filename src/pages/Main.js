@@ -9,6 +9,7 @@ class Main extends Component {
           data-testid="home-initial-message"
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
+          Requisito 6
         </p>
         <CartButton />
       </div>
