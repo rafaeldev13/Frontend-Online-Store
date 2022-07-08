@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Product from '../components/Product';
 
 class Cart extends Component {
@@ -10,19 +11,20 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    const cartList = JSON.parse(localStorage.getItem('cartItems'));
-    this.setState({ cartList });
+    const { CartList } = this.props;
+    this.setState((prevState) => {
+      const prev = prevState.cartList;
+      const List = [...prev, CartList];
+      return ({ cartList: List });
+    });
   }
 
   createProduct = (item) => {
-    const { price, thumbnail, title, id } = item;
+    const { id } = item;
     return (
       <Product
-        price={ price }
-        img={ thumbnail }
-        name={ title }
+        item={ item }
         key={ id }
-        id={ id }
         buttonTitle="Adicionar ao Carrinho"
       /*  clickButtonCart={this.clickButtonCart} */
       />
@@ -41,7 +43,7 @@ class Cart extends Component {
               { cartList.map((item) => (
                 <div key={ item.id }>
                   {this.createProduct(item)}
-                  <h3 data-testid="shopping-cart-product-quantity">quantidade</h3>
+                  <h3 data-testid="shopping-cart-product-quantity">1</h3>
                   <button
                     type="button"
                     data-testid="product-detail-add-to-cart"
@@ -54,5 +56,9 @@ class Cart extends Component {
     );
   }
 }
+
+Cart.propTypes = {
+  CartList: PropTypes.shape({}),
+}.isRequired;
 
 export default Cart;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProductList from '../components/ProductList';
 import CartButton from '../components/CartButton';
 import { getProductsFromCategory } from '../services/api';
@@ -36,14 +37,18 @@ class Main extends Component {
 
   render() {
     const { category, products } = this.state;
+    const { setList } = this.props;
     return (
       <div>
+        <CartButton />
         <ListaCategory change={ this.value } />
         {
           products.length > 0 ? <ProductList
             products={ products }
             category={ category }
+            setList={ setList }
           /> : <ProductList
+            setList={ setList }
             products={ [] }
             category={ category }
           />
@@ -54,10 +59,13 @@ class Main extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
           Requisito 7
         </p>
-        <CartButton />
       </div>
     );
   }
 }
+
+Main.propTypes = {
+  setList: PropTypes.func,
+}.isRequired;
 
 export default Main;
