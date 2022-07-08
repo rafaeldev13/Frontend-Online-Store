@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class ListaCategory extends Component {
@@ -18,32 +17,26 @@ class ListaCategory extends Component {
 
   render() {
     const { categoryList } = this.state;
-    const { change } = this.props;
+    console.log(categoryList);
     return (
       <aside>
         {
           categoryList.map((category) => (
             <label
               key={ category.id }
-              htmlFor={ category.id }
+              htmlFor={ `categoria${category.id}` }
               data-testid="category"
             >
+              { category.name }
               <input
                 type="radio"
-                name="category"
-                id={ category.id }
-                onChange={ change }
+                id={ `categoria${category.id}` }
               />
-              { category.name }
             </label>))
         }
       </aside>
     );
   }
 }
-
-ListaCategory.propTypes = {
-  change: PropTypes.func.isRequired,
-};
 
 export default ListaCategory;
