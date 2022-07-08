@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Product extends Component {
+  const { onButtonClick } = this.state;
   render() {
     const { price, name, img } = this.props;
     return (
@@ -9,6 +10,12 @@ class Product extends Component {
         <h3 data-testid="product">{name}</h3>
         <p>{`R$ ${price}`}</p>
         <img src={ img } alt={ name } />
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          name="addCartItem"
+          onClick={() => onButtonClick }
+        ></button>
       </div>
     );
   }

@@ -19,6 +19,10 @@ class ProductList extends Component {
     });
   }
 
+  onButtonclick = ({ target }) => {
+    console.log(target);
+  }
+
   createProduct = (item) => {
     const { price, thumbnail, title, id } = item;
     return <Product price={ price } img={ thumbnail } name={ title } key={ id } />;
