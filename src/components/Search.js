@@ -12,9 +12,9 @@ class Search extends Component {
   }
 
   click = async () => {
-    const { saveObject } = this.props;
+    const { saveObject, category } = this.props;
     const { inputSearch } = this.state;
-    saveObject(await getProductsFromCategoryAndQuery('MLB5672', inputSearch));
+    saveObject(await getProductsFromCategoryAndQuery(category, inputSearch));
   }
 
   changeInput = ({ target }) => {
@@ -42,6 +42,7 @@ class Search extends Component {
 
 Search.propTypes = {
   saveObject: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default Search;

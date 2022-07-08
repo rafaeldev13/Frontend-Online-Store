@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Product from './Product';
 import Search from './Search';
 
@@ -25,13 +26,24 @@ class ProductList extends Component {
 
   render() {
     const { items } = this.state;
+    const { category, products } = this.props;
     return (
       <div>
-        <Search saveObject={ this.saveObject } />
-        { items.map((item) => this.createProduct(item)) }
+        <div>
+          <Search category={ category } saveObject={ this.saveObject } />
+        </div>
+        <div>
+          { items.length > 0 ? (items.map((item) => this.createProduct(item)))
+            : (products.map((item) => this.createProduct(item))) }
+        </div>
       </div>
     );
   }
 }
+
+ProductList.propTypes = {
+  category: PropTypes.string.isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
 
 export default ProductList;
