@@ -48,7 +48,7 @@ class Main extends Component {
           data-testid="home-initial-message"
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
-          Requisito 6
+          Requisito 7
         </p>
         <CartButton />
       </div>
