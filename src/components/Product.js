@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Product extends Component {
-  const { onButtonClick } = this.state;
   render() {
+    const { onButtonClick } = this.state;
     const { price, name, img } = this.props;
     return (
       <div>
