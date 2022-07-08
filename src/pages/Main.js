@@ -36,8 +36,11 @@ class Main extends Component {
       <div>
         <ListaCategory change={ this.value } />
         {
-          products.length > 0 && <ProductList
+          products.length > 0 ? <ProductList
             products={ products }
+            category={ category }
+          /> : <ProductList
+            products={ [] }
             category={ category }
           />
         }

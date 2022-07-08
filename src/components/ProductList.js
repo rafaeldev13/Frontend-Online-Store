@@ -29,9 +29,13 @@ class ProductList extends Component {
     const { category, products } = this.props;
     return (
       <div>
-        <Search category={ category } saveObject={ this.saveObject } />
-        { items.length > 0 ? (items.map((item) => this.createProduct(item)))
-          : (products.map((item) => this.createProduct(item))) }
+        <div>
+          <Search category={ category } saveObject={ this.saveObject } />
+        </div>
+        <div>
+          { items.length > 0 ? (items.map((item) => this.createProduct(item)))
+            : (products.map((item) => this.createProduct(item))) }
+        </div>
       </div>
     );
   }
