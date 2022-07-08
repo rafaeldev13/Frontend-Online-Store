@@ -19,15 +19,21 @@ class ProductList extends Component {
     });
   }
 
+  clickButtonCart = (e) => {
+    console.log(e);
+  }
+
   createProduct = (item) => {
     const { price, thumbnail, title, id } = item;
-    return (<Product
-      price={ price }
-      img={ thumbnail }
-      name={ title }
-      id={ id }
-      key={ id }
-    />);
+    return (
+      <Product
+        price={ price }
+        img={ thumbnail }
+        name={ title }
+        key={ id }
+        id={ id }
+        clickButtonCart={ this.clickButtonCart }
+      />);
   }
 
   render() {
