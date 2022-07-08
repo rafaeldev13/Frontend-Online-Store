@@ -21,7 +21,13 @@ class ProductList extends Component {
 
   createProduct = (item) => {
     const { price, thumbnail, title, id } = item;
-    return <Product price={ price } img={ thumbnail } name={ title } key={ id } />;
+    return (<Product
+      price={ price }
+      img={ thumbnail }
+      name={ title }
+      id={ id }
+      key={ id }
+    />);
   }
 
   render() {
