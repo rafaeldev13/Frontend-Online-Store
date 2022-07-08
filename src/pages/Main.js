@@ -14,6 +14,10 @@ class Main extends Component {
     };
   }
 
+  componentDidMount() {
+    localStorage.setItem('cartItems', JSON.stringify([]));
+  }
+
   getProducts = async () => {
     const { category } = this.state;
     const products = await getProductsFromCategory(category);

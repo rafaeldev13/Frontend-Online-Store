@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Product from './Product';
 import Search from './Search';
+import { getProductsById } from '../services/api';
 
 class ProductList extends Component {
   constructor() {
@@ -19,8 +20,10 @@ class ProductList extends Component {
     });
   }
 
-  clickButtonCart = (e) => {
-    console.log(e);
+  clickButtonCart = async (e) => {
+    const cartItem = await getProductsById(e);
+    const listItems = JSON.parse(localStorage.getItem('cartItems'));
+    localStorage.setItem('cartItems', JSON.stringify([...listItems, cartItem]));
   }
 
   createProduct = (item) => {
@@ -32,6 +35,7 @@ class ProductList extends Component {
         name={ title }
         key={ id }
         id={ id }
+        buttonTitle="Adicionar ao Carrinho"
         clickButtonCart={ this.clickButtonCart }
       />);
   }
