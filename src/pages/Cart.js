@@ -12,11 +12,14 @@ class Cart extends Component {
 
   componentDidMount() {
     const { CartList } = this.props;
+    // Consertar depois
+    // if (CartList !== '') {
     this.setState((prevState) => {
       const prev = prevState.cartList;
-      const List = [...prev, CartList];
+      const List = Object.values(CartList).length !== 0 ? [...prev, CartList] : prev;
       return ({ cartList: List });
     });
+    // }
   }
 
   createProduct = (item) => {
@@ -33,10 +36,9 @@ class Cart extends Component {
 
   render() {
     const { cartList } = this.state;
-    const zero = 0;
     return (
       <div>
-        {cartList.length < zero ? (
+        {cartList.length === 0 ? (
           <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>)
           : (
             <div>
