@@ -4,20 +4,23 @@ import { Link } from 'react-router-dom';
 
 class Product extends Component {
   render() {
-    const { price, name, img, clickButtonCart, id } = this.props;
+    const { item,
+      item: { title, price, thumbnail, id },
+      clickButtonCart,
+      buttonTitle } = this.props;
     return (
       <div data-testid="product">
-        <h3>{name}</h3>
+        <p data-testid="shopping-cart-product-name">{title}</p>
         <p>{`R$ ${price}`}</p>
-        <img src={ img } alt={ name } />
+        <img src={ thumbnail } alt={ title } />
         <Link data-testid="product-detail-link" to={ `/item/${id}` }>Detalhes</Link>
         <button
           type="button"
           data-testid="product-add-to-cart"
           name="addCartItem"
-          onClick={ () => clickButtonCart(id) }
+          onClick={ () => clickButtonCart(item) }
         >
-          Adicionar ao Carrinho
+          { buttonTitle }
         </button>
       </div>
     );
@@ -25,10 +28,10 @@ class Product extends Component {
 }
 
 Product.propTypes = {
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  clickButtonCart: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-};
+  item: PropTypes.shape({}),
+  img: PropTypes.string,
+  clickButtonCart: PropTypes.func,
+  buttonTitle: PropTypes.string,
+}.isRequired;
+
 export default Product;

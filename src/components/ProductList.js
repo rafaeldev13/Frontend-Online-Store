@@ -19,19 +19,18 @@ class ProductList extends Component {
     });
   }
 
-  clickButtonCart = (e) => {
-    console.log(e);
+  clickButtonCart = async (item) => {
+    const { setList } = this.props;
+    setList(item);
   }
 
   createProduct = (item) => {
-    const { price, thumbnail, title, id } = item;
+    const { id } = item;
     return (
       <Product
-        price={ price }
-        img={ thumbnail }
-        name={ title }
+        item={ item }
         key={ id }
-        id={ id }
+        buttonTitle="Adicionar ao Carrinho"
         clickButtonCart={ this.clickButtonCart }
       />);
   }
@@ -54,8 +53,9 @@ class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-  category: PropTypes.string.isRequired,
-  products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-};
+  category: PropTypes.string,
+  products: PropTypes.arrayOf(PropTypes.shape({})),
+  setList: PropTypes.shape({}),
+}.isRequired;
 
 export default ProductList;
