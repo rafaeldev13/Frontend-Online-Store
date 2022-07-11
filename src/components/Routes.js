@@ -9,13 +9,15 @@ class Routes extends Component {
     super();
 
     this.state = {
-      CartList: {},
+      CartList: [],
     };
   }
 
   setList = (item) => {
-    this.setState({
-      CartList: item,
+    this.setState((prevState) => {
+      const prev = prevState.CartList;
+      const CartList = [...prev, item];
+      return ({ CartList });
     });
   }
 
