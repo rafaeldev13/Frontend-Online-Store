@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsById } from '../services/api';
+import CartButton from './CartButton';
 
 class ItemDisplay extends Component {
   constructor() {
@@ -30,6 +31,7 @@ class ItemDisplay extends Component {
     const { setList } = this.props;
     return (
       <div>
+        <CartButton />
         <h3 data-testid="product-detail-name">{title}</h3>
         <button
           data-testid="product-detail-add-to-cart"
