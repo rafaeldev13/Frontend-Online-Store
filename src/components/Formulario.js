@@ -80,17 +80,15 @@ class Formulario extends Component {
     this.save();
   }
 
-  renderAvaliation = (avaliation) => {
-    return (
-      <div key={ avaliation.email }>
-        <p>
-          { avaliation.email }
-        </p>
-        <p>
-          { avaliation.comentarios }
-        </p>
-      </div>);
-  };
+  renderAvaliation = (avaliation) => (
+    <div key={ avaliation.email }>
+      <p>
+        { avaliation.email }
+      </p>
+      <p>
+        { avaliation.comentarios }
+      </p>
+    </div>);
 
   render() {
     const five = [{ num: 1 }, { num: 2 }, { num: 3 }, { num: 4 }, { num: 5 }];
