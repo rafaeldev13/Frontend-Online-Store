@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Product from '../components/Product';
 import ModifyQuantity from '../components/ModifyQuantity';
-import { Link } from 'react-router-dom';
 
 class Cart extends Component {
   constructor() {
