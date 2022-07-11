@@ -4,12 +4,18 @@ class Formulario extends Component {
   constructor() {
     super();
     this.state = {
-      forms: [{
+      forms: {
         email: '',
         comentarios: '',
         avaliacao: 0,
-      }],
+      },
     };
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('avaliations') === null) {
+      localStorage.setItem('avaliations', JSON.stringify([]));
+    }
   }
 
   createStars = (index) => (
@@ -40,8 +46,16 @@ class Formulario extends Component {
     });
   }
 
+  save = () => {
+    const { forms } = this.state;
+    const list = JSON.parse(localStorage.getItem('avaliations'));
+    console.log(list);
+    localStorage.setItem('avaliations', JSON.stringify(...list));
+  }
+
   submitForm = (e) => {
     e.preventDefault();
+    this.save();
   }
 
   render() {
@@ -55,7 +69,7 @@ class Formulario extends Component {
               type="email"
               id="email"
               name="email"
-              value={ forms[0].email }
+              value={ forms.email }
               data-testid="product-detail-email"
               onChange={ this.handleChange }
             />
@@ -69,7 +83,7 @@ class Formulario extends Component {
               data-testid="product-detail-evaluation"
               id="mensagem"
               name="comentarios"
-              value={ forms[0].comentarios }
+              value={ forms.comentarios }
               placeholder="Mensagem(opcional)"
               onChange={ this.handleChange }
             />
@@ -82,18 +96,11 @@ class Formulario extends Component {
             Avaliar
           </button>
         </form>
-        {/* <div>
-          <p>
-            { forms[0].email }
-          </p>
+        <div>
           <fieldset>
             <legend>Avalie o Produto</legend>
-            {five.map((num) => this.createStars(num.num))}
           </fieldset>
-          <p>
-            { forms[0].comentarios }
-          </p>
-        </div> */}
+        </div>
       </section>
     );
   }
