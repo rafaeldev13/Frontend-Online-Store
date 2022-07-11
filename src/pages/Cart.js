@@ -16,7 +16,7 @@ class Cart extends Component {
     // if (CartList !== '') {
     this.setState((prevState) => {
       const prev = prevState.cartList;
-      const List = Object.values(CartList).length !== 0 ? [...prev, CartList] : prev;
+      const List = CartList.length !== 0 ? [...CartList] : prev;
       return ({ cartList: List });
     });
     // }
@@ -60,7 +60,7 @@ class Cart extends Component {
 }
 
 Cart.propTypes = {
-  CartList: PropTypes.shape({}),
+  CartList: PropTypes.arrayOf,
 }.isRequired;
 
 export default Cart;
