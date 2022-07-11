@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsById } from '../services/api';
+import CartButton from './CartButton';
 
 class ItemDisplay extends Component {
   constructor() {
@@ -24,9 +25,22 @@ class ItemDisplay extends Component {
   }
 
   render() {
-    const { product: { title } } = this.state;
+    const { product: { title },
+      product,
+    } = this.state;
+    const { setList } = this.props;
     return (
-      <h3 data-testid="product-detail-name">{title}</h3>
+      <div>
+        <CartButton />
+        <h3 data-testid="product-detail-name">{title}</h3>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ (() => { setList(product); }) }
+        >
+          Adicionar ao Carrinho
+        </button>
+      </div>
     );
   }
 }
@@ -36,7 +50,8 @@ ItemDisplay.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
-  }).isRequired,
-};
+  }),
+  setList: PropTypes.func,
+}.isRequired;
 
 export default ItemDisplay;

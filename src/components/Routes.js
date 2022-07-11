@@ -40,7 +40,13 @@ class Routes extends Component {
             CartList={ CartList }
           />) }
         />
-        <Route path="/item/:id" component={ ItemDisplay } />
+        <Route
+          path="/item/:id"
+          render={ ((props) => (<ItemDisplay
+            { ...props }
+            setList={ this.setList }
+          />)) }
+        />
       </div>
     );
   }

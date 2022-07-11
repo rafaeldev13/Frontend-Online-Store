@@ -26,12 +26,14 @@ class ProductList extends Component {
 
   createProduct = (item) => {
     const { id } = item;
+    const { setList } = this.props;
     return (
       <Product
         item={ item }
         key={ id }
         buttonTitle="Adicionar ao Carrinho"
         clickButtonCart={ this.clickButtonCart }
+        setList={ setList }
       />);
   }
 
