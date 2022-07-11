@@ -23,6 +23,16 @@ class Formulario extends Component {
     });
   }
 
+  clear = () => {
+    this.setState({
+      forms: {
+        email: '',
+        comentarios: '',
+        avaliacao: 0,
+      },
+    });
+  }
+
   createStars = (index) => (
     <input
       type="radio"
@@ -62,6 +72,7 @@ class Formulario extends Component {
     const list2 = list.length > 0 ? [...list, forms] : [forms];
     localStorage.setItem('avaliations', JSON.stringify([...list2]));
     this.verification();
+    this.clear();
   }
 
   submitForm = (e) => {
@@ -70,7 +81,6 @@ class Formulario extends Component {
   }
 
   renderAvaliation = (avaliation) => {
-    console.log(avaliation);
     return (
       <div key={ avaliation.email }>
         <p>
