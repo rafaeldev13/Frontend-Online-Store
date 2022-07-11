@@ -14,9 +14,13 @@ class Formulario extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('avaliations') === null) {
-      localStorage.setItem('avaliations', JSON.stringify([]));
-    }
+    this.verification();
+  }
+
+  verification = () => {
+    this.setState({
+      avaliation: JSON.parse(localStorage.getItem('avaliations') !== null),
+    });
   }
 
   createStars = (index) => (
@@ -41,7 +45,6 @@ class Formulario extends Component {
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(name, value);
     this.setState((prev) => ({
       forms: {
         ...prev.forms,
@@ -51,33 +54,37 @@ class Formulario extends Component {
   };
 
   save = () => {
+    if (localStorage.getItem('avaliations') === null) {
+      localStorage.setItem('avaliations', JSON.stringify([]));
+    }
     const { forms } = this.state;
     const list = JSON.parse(localStorage.getItem('avaliations'));
     const list2 = list.length > 0 ? [...list, forms] : [forms];
     localStorage.setItem('avaliations', JSON.stringify([...list2]));
+    this.verification();
   }
 
   submitForm = (e) => {
     e.preventDefault();
     this.save();
-    this.setState({ avaliation: true });
   }
 
-  renderAvaliation = (avaliation) => (
-    <div>
-      <p data-testid="product-detail-email">
-        { avaliation.email }
-      </p>
-      <h3>{ avaliation.avaliacao }</h3>
-      <p data-testid="product-detail-evaluation">
-        { avaliation.comentarios }
-      </p>
-    </div>);
+  renderAvaliation = (avaliation) => {
+    console.log(avaliation);
+    return (
+      <div key={ avaliation.email }>
+        <p>
+          { avaliation.email }
+        </p>
+        <p>
+          { avaliation.comentarios }
+        </p>
+      </div>);
+  };
 
   render() {
     const five = [{ num: 1 }, { num: 2 }, { num: 3 }, { num: 4 }, { num: 5 }];
     const { forms, avaliation } = this.state;
-    console.log(forms);
     return (
       <section>
         <form>
@@ -86,6 +93,7 @@ class Formulario extends Component {
               data-testid="product-detail-email"
               type="email"
               id="email"
+              placeholder="email"
               name="email"
               value={ forms.email }
               onChange={ this.handleChange }
