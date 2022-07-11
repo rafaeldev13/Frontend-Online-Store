@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsById } from '../services/api';
 import CartButton from './CartButton';
+import Formulario from './Formulario';
 
 class ItemDisplay extends Component {
   constructor() {
@@ -40,6 +41,7 @@ class ItemDisplay extends Component {
         >
           Adicionar ao Carrinho
         </button>
+        <Formulario />
       </div>
     );
   }
