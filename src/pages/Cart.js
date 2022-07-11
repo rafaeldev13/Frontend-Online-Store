@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
+import ModifyQuantity from '../components/ModifyQuantity';
 
 class Cart extends Component {
   constructor() {
@@ -28,7 +29,7 @@ class Cart extends Component {
       <Product
         item={ item }
         key={ id }
-        buttonTitle="Adicionar ao Carrinho"
+        buttonTitle="Remover do carrinho"
       /*  clickButtonCart={this.clickButtonCart} */
       />
     );
@@ -45,13 +46,7 @@ class Cart extends Component {
               { cartList.map((item) => (
                 <div key={ item.id }>
                   {this.createProduct(item)}
-                  <h3 data-testid="shopping-cart-product-quantity">1</h3>
-                  <button
-                    type="button"
-                    data-testid="product-detail-add-to-cart"
-                  >
-                    +
-                  </button>
+                  <ModifyQuantity />
                 </div>))}
             </div>)}
       </div>
