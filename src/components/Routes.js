@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import Main from '../pages/Main';
 import Cart from '../pages/Cart';
 import ItemDisplay from './ItemDisplay';
+import Checkout from '../pages/Checkout';
 
 class Routes extends Component {
   constructor() {
@@ -47,6 +48,7 @@ class Routes extends Component {
             setList={ this.setList }
           />)) }
         />
+        <Route path="/checkout" component={ Checkout } />
       </div>
     );
   }

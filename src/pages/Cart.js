@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import ModifyQuantity from '../components/ModifyQuantity';
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
   constructor() {
@@ -43,6 +44,7 @@ class Cart extends Component {
           <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>)
           : (
             <div>
+              <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>
               { cartList.map((item) => (
                 <div key={ item.id }>
                   {this.createProduct(item)}
