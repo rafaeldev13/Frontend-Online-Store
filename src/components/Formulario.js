@@ -9,6 +9,7 @@ class Formulario extends Component {
         comentarios: '',
         avaliacao: 0,
       },
+      avaliation: false,
     };
   }
 
@@ -30,47 +31,63 @@ class Formulario extends Component {
   );
 
   handleAvaliantion = ({ target }) => {
-    this.setState({
-      forms: [{
+    this.setState((prev) => ({
+      forms: {
+        ...prev.forms,
         avaliacao: target.id,
-      }],
-    });
+      },
+    }));
   }
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    this.setState({
-      forms: [{
+    console.log(name, value);
+    this.setState((prev) => ({
+      forms: {
+        ...prev.forms,
         [name]: value,
-      }],
-    });
-  }
+      },
+    }));
+  };
 
   save = () => {
     const { forms } = this.state;
     const list = JSON.parse(localStorage.getItem('avaliations'));
-    console.log(list);
-    localStorage.setItem('avaliations', JSON.stringify(...list));
+    const list2 = list.length > 0 ? [...list, forms] : [forms];
+    localStorage.setItem('avaliations', JSON.stringify([...list2]));
   }
 
   submitForm = (e) => {
     e.preventDefault();
     this.save();
+    this.setState({ avaliation: true });
   }
+
+  renderAvaliation = (avaliation) => (
+    <div>
+      <p data-testid="product-detail-email">
+        { avaliation.email }
+      </p>
+      <h3>{ avaliation.avaliacao }</h3>
+      <p data-testid="product-detail-evaluation">
+        { avaliation.comentarios }
+      </p>
+    </div>);
 
   render() {
     const five = [{ num: 1 }, { num: 2 }, { num: 3 }, { num: 4 }, { num: 5 }];
-    const { forms } = this.state;
+    const { forms, avaliation } = this.state;
+    console.log(forms);
     return (
       <section>
         <form>
           <label htmlFor="email">
             <input
+              data-testid="product-detail-email"
               type="email"
               id="email"
               name="email"
               value={ forms.email }
-              data-testid="product-detail-email"
               onChange={ this.handleChange }
             />
           </label>
@@ -96,11 +113,10 @@ class Formulario extends Component {
             Avaliar
           </button>
         </form>
-        <div>
-          <fieldset>
-            <legend>Avalie o Produto</legend>
-          </fieldset>
-        </div>
+        {
+          avaliation && JSON.parse(localStorage.getItem('avaliations'))
+            .map((item) => this.renderAvaliation(item))
+        }
       </section>
     );
   }
