@@ -3,13 +3,27 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Product extends Component {
+  freeShipping = () => {
+    const { item: { shipping } } = this.props;
+    const freeShipping = shipping.free_shipping;
+    if (freeShipping) {
+      return (
+        <h3 data-testid="free-shipping">Frete Gratis</h3>
+      );
+    }
+  }
+
   render() {
     const { item,
-      item: { title, price, thumbnail, id },
+      item: { title,
+        price,
+        thumbnail,
+        id },
       clickButtonCart,
       buttonTitle } = this.props;
     return (
       <div data-testid="product">
+        { this.freeShipping() }
         <p data-testid="shopping-cart-product-name">{title}</p>
         <p>{`R$ ${price}`}</p>
         <img src={ thumbnail } alt={ title } />
