@@ -14,14 +14,11 @@ class Cart extends Component {
 
   componentDidMount() {
     const { CartList } = this.props;
-    // Consertar depois
-    // if (CartList !== '') {
     this.setState((prevState) => {
       const prev = prevState.cartList;
       const List = CartList.length !== 0 ? [...CartList] : prev;
       return ({ cartList: List });
     });
-    // }
   }
 
   createProduct = (item) => {
