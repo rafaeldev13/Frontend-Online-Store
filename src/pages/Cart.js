@@ -46,7 +46,10 @@ class Cart extends Component {
               { cartList.map((item) => (
                 <div key={ item.id }>
                   {this.createProduct(item)}
-                  <ModifyQuantity modifyItemsQntd={ modifyItemsQntd } />
+                  <ModifyQuantity
+                    modifyItemsQntd={ modifyItemsQntd }
+                    estoque={ item.available_quantity }
+                  />
                 </div>))}
             </div>)}
       </div>
