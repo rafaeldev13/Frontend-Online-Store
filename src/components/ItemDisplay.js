@@ -29,10 +29,10 @@ class ItemDisplay extends Component {
     const { product: { title },
       product,
     } = this.state;
-    const { setList } = this.props;
+    const { setList, ItemsQntd } = this.props;
     return (
       <div>
-        <CartButton />
+        <CartButton ItemsQntd={ ItemsQntd } />
         <h3 data-testid="product-detail-name">{title}</h3>
         <button
           data-testid="product-detail-add-to-cart"
@@ -54,6 +54,7 @@ ItemDisplay.propTypes = {
     }),
   }),
   setList: PropTypes.func,
+  ItemsQntd: PropTypes.number,
 }.isRequired;
 
 export default ItemDisplay;

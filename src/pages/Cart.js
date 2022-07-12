@@ -14,14 +14,11 @@ class Cart extends Component {
 
   componentDidMount() {
     const { CartList } = this.props;
-    // Consertar depois
-    // if (CartList !== '') {
     this.setState((prevState) => {
       const prev = prevState.cartList;
       const List = CartList.length !== 0 ? [...CartList] : prev;
       return ({ cartList: List });
     });
-    // }
   }
 
   createProduct = (item) => {
@@ -37,6 +34,7 @@ class Cart extends Component {
   }
 
   render() {
+    const { modifyItemsQntd } = this.props;
     const { cartList } = this.state;
     return (
       <div>
@@ -48,7 +46,7 @@ class Cart extends Component {
               { cartList.map((item) => (
                 <div key={ item.id }>
                   {this.createProduct(item)}
-                  <ModifyQuantity />
+                  <ModifyQuantity modifyItemsQntd={ modifyItemsQntd } />
                 </div>))}
             </div>)}
       </div>
@@ -58,6 +56,7 @@ class Cart extends Component {
 
 Cart.propTypes = {
   CartList: PropTypes.arrayOf,
+  modifyItemsQntd: PropTypes.func,
 }.isRequired;
 
 export default Cart;
