@@ -19,6 +19,7 @@ class ModifyQuantity extends Component {
     const increase = +1;
     const decrease = -1;
     const { quantity } = this.state;
+    const { estoque } = this.props;
     return (
       <div>
         <button
@@ -26,6 +27,7 @@ class ModifyQuantity extends Component {
           name="increase"
           data-testid="product-increase-quantity"
           onClick={ () => { this.modify(increase); } }
+          disabled={ quantity >= estoque }
         >
           +
         </button>
@@ -46,6 +48,7 @@ class ModifyQuantity extends Component {
 
 ModifyQuantity.propTypes = {
   modifyItemsQntd: PropTypes.func,
+  estoque: PropTypes.number,
 }.isRequired;
 
 export default ModifyQuantity;
