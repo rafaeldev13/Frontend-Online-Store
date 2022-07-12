@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ModifyQuantity extends Component {
   constructor() {
@@ -8,15 +9,15 @@ class ModifyQuantity extends Component {
     };
   }
 
-  modify = ({ target }) => {
-    if (target.name === 'increase') {
-      this.setState((prev) => ({ quantity: prev.quantity + 1 }));
-    } else {
-      this.setState((prev) => ({ quantity: prev.quantity - 1 }));
-    }
+  modify = (number) => {
+    const { modifyItemsQntd } = this.props;
+    modifyItemsQntd(number);
+    this.setState((prev) => ({ quantity: prev.quantity + number }));
   }
 
   render() {
+    const increase = +1;
+    const decrease = -1;
     const { quantity } = this.state;
     return (
       <div>
@@ -24,7 +25,7 @@ class ModifyQuantity extends Component {
           type="button"
           name="increase"
           data-testid="product-increase-quantity"
-          onClick={ this.modify }
+          onClick={ () => { this.modify(increase); } }
         >
           +
         </button>
@@ -33,7 +34,7 @@ class ModifyQuantity extends Component {
           type="button"
           name="decrease"
           data-testid="product-decrease-quantity"
-          onClick={ this.modify }
+          onClick={ () => { this.modify(decrease); } }
           disabled={ quantity === 1 }
         >
           -
@@ -42,5 +43,9 @@ class ModifyQuantity extends Component {
     );
   }
 }
+
+ModifyQuantity.propTypes = {
+  modifyItemsQntd: PropTypes.func,
+}.isRequired;
 
 export default ModifyQuantity;

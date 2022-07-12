@@ -34,6 +34,7 @@ class Cart extends Component {
   }
 
   render() {
+    const { modifyItemsQntd } = this.props;
     const { cartList } = this.state;
     return (
       <div>
@@ -45,7 +46,7 @@ class Cart extends Component {
               { cartList.map((item) => (
                 <div key={ item.id }>
                   {this.createProduct(item)}
-                  <ModifyQuantity />
+                  <ModifyQuantity modifyItemsQntd={ modifyItemsQntd } />
                 </div>))}
             </div>)}
       </div>
@@ -55,6 +56,7 @@ class Cart extends Component {
 
 Cart.propTypes = {
   CartList: PropTypes.arrayOf,
+  modifyItemsQntd: PropTypes.func,
 }.isRequired;
 
 export default Cart;

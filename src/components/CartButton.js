@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 class CartButton extends Component {
@@ -18,6 +19,7 @@ class CartButton extends Component {
 
   render() {
     const { redirect } = this.state;
+    const { ItemsQntd } = this.props;
     return (
       <div>
         {
@@ -30,9 +32,14 @@ class CartButton extends Component {
         >
           Carrinho
         </button>
+        <span data-testid="shopping-cart-size">{ ItemsQntd }</span>
       </div>
     );
   }
 }
+
+CartButton.propTypes = {
+  ItemsQntd: PropTypes.number,
+}.isRequired;
 
 export default CartButton;

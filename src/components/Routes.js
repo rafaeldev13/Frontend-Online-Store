@@ -11,19 +11,28 @@ class Routes extends Component {
 
     this.state = {
       CartList: [],
+      Items: 0,
     };
+  }
+
+  modifyItemsQntd = (num) => {
+    this.setState((prev) => {
+      const Items = prev.Items + num;
+      return ({ Items });
+    });
   }
 
   setList = (item) => {
     this.setState((prevState) => {
       const prev = prevState.CartList;
       const CartList = [...prev, item];
-      return ({ CartList });
+      const cartLength = CartList.length;
+      return ({ CartList, Items: cartLength });
     });
   }
 
   render() {
-    const { CartList } = this.state;
+    const { CartList, Items } = this.state;
     return (
       <div>
         <Route
@@ -32,6 +41,7 @@ class Routes extends Component {
           render={ (props) => (<Main
             { ...props }
             setList={ this.setList }
+            ItemsQntd={ Items }
           />) }
         />
         <Route
@@ -39,6 +49,7 @@ class Routes extends Component {
           render={ (props) => (<Cart
             { ...props }
             CartList={ CartList }
+            modifyItemsQntd={ this.modifyItemsQntd }
           />) }
         />
         <Route
@@ -46,6 +57,7 @@ class Routes extends Component {
           render={ ((props) => (<ItemDisplay
             { ...props }
             setList={ this.setList }
+            ItemsQntd={ Items }
           />)) }
         />
         <Route path="/checkout" component={ Checkout } />

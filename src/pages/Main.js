@@ -37,10 +37,10 @@ class Main extends Component {
 
   render() {
     const { category, products } = this.state;
-    const { setList } = this.props;
+    const { setList, ItemsQntd } = this.props;
     return (
       <div>
-        <CartButton />
+        <CartButton ItemsQntd={ ItemsQntd } />
         <ListaCategory change={ this.value } />
         {
           products.length > 0 ? <ProductList
@@ -65,6 +65,7 @@ class Main extends Component {
 
 Main.propTypes = {
   setList: PropTypes.func,
+  ItemsQntd: PropTypes.number,
 }.isRequired;
 
 export default Main;
