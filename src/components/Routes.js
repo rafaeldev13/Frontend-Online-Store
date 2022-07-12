@@ -11,14 +11,24 @@ class Routes extends Component {
 
     this.state = {
       CartList: [],
+      ItemsLength: 0,
+      ItemsQntd: 0,
       Items: 0,
     };
   }
 
   modifyItemsQntd = (num) => {
     this.setState((prev) => {
-      const Items = prev.Items + num;
-      return ({ Items });
+      const ItemsQntd = prev.ItemsQntd + num;
+      return ({ ItemsQntd });
+    }, () => { this.setItem(); });
+  }
+
+  setItem = () => {
+    const { ItemsLength, ItemsQntd } = this.state;
+    const Items = ItemsLength + ItemsQntd;
+    this.setState({
+      Items,
     });
   }
 
@@ -27,8 +37,8 @@ class Routes extends Component {
       const prev = prevState.CartList;
       const CartList = [...prev, item];
       const cartLength = CartList.length;
-      return ({ CartList, Items: cartLength });
-    });
+      return ({ CartList, ItemsLength: cartLength });
+    }, () => { this.setItem(); });
   }
 
   render() {
