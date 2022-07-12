@@ -53,7 +53,7 @@ class Cart extends Component {
     );
   }
 }
-
+//
 Cart.propTypes = {
   CartList: PropTypes.arrayOf,
   modifyItemsQntd: PropTypes.func,
