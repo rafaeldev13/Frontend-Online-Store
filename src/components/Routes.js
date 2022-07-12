@@ -17,6 +17,26 @@ class Routes extends Component {
     };
   }
 
+  componentDidMount() {
+    this.load();
+  }
+
+  save = () => {
+    const { CartList } = this.state;
+    localStorage.setItem('items', JSON.stringify(CartList));
+  }
+
+  load = () => {
+    if (localStorage.getItem('items') === null) {
+      localStorage.setItem('items', JSON.stringify([]));
+    }
+    const CartList = JSON.parse(localStorage.getItem('items'));
+    this.setState({
+      CartList,
+      ItemsLength: CartList.length,
+    }, () => { this.setItem(); });
+  }
+
   modifyItemsQntd = (num) => {
     this.setState((prev) => {
       const ItemsQntd = prev.ItemsQntd + num;
@@ -38,7 +58,7 @@ class Routes extends Component {
       const CartList = [...prev, item];
       const cartLength = CartList.length;
       return ({ CartList, ItemsLength: cartLength });
-    }, () => { this.setItem(); });
+    }, () => { this.setItem(); this.save(); });
   }
 
   render() {
